@@ -6,14 +6,16 @@ import { InputCheckbox } from "./components/input-checkbox";
 import { Card } from "./components/card";
 import { Badge } from "./components/badge";
 import { Container } from "./components/container";
+import { Skeleton } from "./components/skeleton";
 
 export function App() {
 
   return (
-    <Container className="flex flex-col gap-2 items-center my-auto">
+    <Container className="flex flex-col gap-2 items-center h-dvh justify-center">
         <div className=" flex gap-2">
           <Badge>25/137</Badge>
           <Badge variant="secondary">25</Badge>
+          <Badge variant="primary" loading>25</Badge>
         </div>
         <div className=" flex gap-2">
           <Button variant="primary">
@@ -33,6 +35,7 @@ export function App() {
           <IconButton variant="primary" icon={<Crown size={24} />} />
           <IconButton variant="secondary" icon={<Crown size={24} />} />
           <IconButton variant="ghost" icon={<Crown size={24} />} />
+          <IconButton loading icon={<Crown size={24} />} />
         </div>
         <div className=" flex gap-2">
           <InputText />
@@ -40,8 +43,7 @@ export function App() {
 
         <div className=" flex gap-2">
           <InputCheckbox />
-          <InputCheckbox />
-          <InputCheckbox />
+          <InputCheckbox loading/>
         </div>
 
         <div className=" flex gap-2 w-full">
@@ -49,6 +51,10 @@ export function App() {
 
             KaiserInc.
           </Card>
+        </div>
+
+        <div className=" flex gap-2 w-full justify-center">
+          <Skeleton className="h-6 w-10/12" />
         </div>
     </Container>
   )
