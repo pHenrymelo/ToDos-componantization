@@ -4,11 +4,17 @@ import { IconButton } from "./components/icon-button";
 import { InputText } from "./components/input-text";
 import { InputCheckbox } from "./components/input-checkbox";
 import { Card } from "./components/card";
+import { Badge } from "./components/badge";
+import { Container } from "./components/container";
 
 export function App() {
 
   return (
-    <div className=" w-full min-h-dvh flex flex-col bg-gray-800 justify-center items-center gap-2 ">
+    <Container className="flex flex-col gap-2 items-center my-auto">
+        <div className=" flex gap-2">
+          <Badge>25/137</Badge>
+          <Badge variant="secondary">25</Badge>
+        </div>
         <div className=" flex gap-2">
           <Button variant="primary">
             <Crown size={24} />
@@ -44,6 +50,6 @@ export function App() {
             KaiserInc.
           </Card>
         </div>
-    </div>
+    </Container>
   )
 }
