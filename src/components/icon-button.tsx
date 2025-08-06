@@ -5,9 +5,9 @@ import { twMerge } from "tailwind-merge"
 export const IconButtonVariants = cva(" inline-flex items-center justify-center cursor-pointer transition duration-300 group", {
     variants: {
         variant: {
-            primary: " bg-kaiserViolet-500 hover:bg-kaiserViolet-700 text-gray-200",
-            secondary: "bg-gray-200 hover:bg-gray-400 text-kaiserViolet-700",
-            ghost: "bg-transparent hover:bg-kaiserViolet-300 text-kaiserViolet-500 hover:text-gray-200"
+            primary: " bg-kaiserViolet-500 hover:bg-kaiserViolet-500/50 text-gray-100",
+            secondary: "bg-gray-100 hover:bg-gray-100/50 text-kaiserViolet-500",
+            ghost: "bg-transparent hover:bg-kaiserViolet-300 text-kaiserViolet-500 hover:text-gray-100"
         },
         size: {
             sm: "w-8 h-8 p-1.5 rounded"

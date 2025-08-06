@@ -3,6 +3,7 @@ import { Button } from "./components/button";
 import { IconButton } from "./components/icon-button";
 import { InputText } from "./components/input-text";
 import { InputCheckbox } from "./components/input-checkbox";
+import { Card } from "./components/card";
 
 export function App() {
 
@@ -35,6 +36,13 @@ export function App() {
           <InputCheckbox />
           <InputCheckbox />
           <InputCheckbox />
+        </div>
+
+        <div className=" flex gap-2 w-full">
+          <Card size="md" className=" mx-auto w-10/12">
+
+            KaiserInc.
+          </Card>
         </div>
     </div>
   )

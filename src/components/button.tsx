@@ -5,9 +5,9 @@ import { twMerge } from "tailwind-merge";
 export const buttonVariants = cva("flex items-center justify-center cursor-pointer transition rounded-lg group gap-2 duration-300 border-2", {
     variants: {
         variant: {
-            primary: "bg-kaiserViolet-500 text-gray-200 hover:bg-kaiserViolet-700 hover:border-kaiserViolet-700 border-kaiserViolet-500 ",
-            secondary: "bg-gray-200 hover:bg-gray-400 hover:border-gray-400 text-kaiserViolet-700 border-gray-200",
-            ghost: "bg-transparent text-kaiserViolet-300 hover:bg-kaiserViolet-300 hover:text-gray-200 border-kaiserViolet-300",
+            primary: "bg-kaiserViolet-500 text-gray-100 hover:bg-kaiserViolet-700 hover:border-kaiserViolet-700 border-kaiserViolet-500 ",
+            secondary: "bg-gray-100 hover:bg-gray-300 hover:border-gray-300 text-kaiserViolet-500 border-gray-100",
+            ghost: "bg-transparent text-kaiserViolet-300 hover:bg-kaiserViolet-300 hover:text-gray-100 border-kaiserViolet-300",
         },
         size: {
             md: "h-14 py-4 px-5"
