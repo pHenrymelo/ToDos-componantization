@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { Text } from "./Text";
+import { Text } from "./text";
 
 export const badgeVariants = cva("inline-flex items-center justify-center rounded-full", {
     variants: {

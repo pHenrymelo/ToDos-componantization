@@ -1,6 +1,8 @@
 import { Crown } from "lucide-react";
-import { Button } from "./components/Button";
-import { IconButton } from "./components/IconButton";
+import { Button } from "./components/button";
+import { IconButton } from "./components/icon-button";
+import { InputText } from "./components/input-text";
+import { InputCheckbox } from "./components/input-checkbox";
 
 export function App() {
 
@@ -21,10 +23,19 @@ export function App() {
           </Button>
         </div>
         <div className=" flex gap-2">
-        <IconButton variant="primary" icon={<Crown size={24} />} />
-        <IconButton variant="secondary" icon={<Crown size={24} />} />
-        <IconButton variant="ghost" icon={<Crown size={24} />} />
-      </div>
+          <IconButton variant="primary" icon={<Crown size={24} />} />
+          <IconButton variant="secondary" icon={<Crown size={24} />} />
+          <IconButton variant="ghost" icon={<Crown size={24} />} />
+        </div>
+        <div className=" flex gap-2">
+          <InputText />
+        </div>
+
+        <div className=" flex gap-2">
+          <InputCheckbox />
+          <InputCheckbox />
+          <InputCheckbox />
+        </div>
     </div>
   )
 }
