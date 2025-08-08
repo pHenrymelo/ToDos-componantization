@@ -5,10 +5,16 @@ import { InputCheckbox } from "../components/input-checkbox";
 import { Text } from "../components/text";
 import { useState } from "react";
 import { InputText } from "../components/input-text";
+import { TaskState, type Task } from "../models/task";
+import { cx } from "class-variance-authority";
 
-export function TaskItem(){
+interface TaskItemProps {
+    task: Task
+}
 
-    const [isEditing, setIsEditing] = useState(false)
+export function TaskItem({task}:TaskItemProps){
+
+    const [isEditing, setIsEditing] = useState(task?.state === TaskState.Creating)
 
     function handleEditTask() {
         setIsEditing(true)
@@ -22,8 +28,8 @@ export function TaskItem(){
         <Card size="md" className="flex items-center gap-4">
             {!isEditing ? <>
             
-            <InputCheckbox />
-            <Text className="flex-1">Desenvolver sistema</Text>
+            <InputCheckbox value={task?.isComplete?.toString()} checked={task?.isComplete} />
+            <Text className={cx("flex-1", {"line-through opacity-85": task?.isComplete})}>{task?.title}</Text>
             <div className="flex items-center justify-center gap-1">
                 <IconButton variant="ghost" icon={<Trash size={16} />}/>
                 <IconButton variant="ghost" icon={<Pencil size={16} onClick={handleEditTask} />}/>
