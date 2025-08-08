@@ -9,7 +9,7 @@ export const IconButtonVariants = cva(" inline-flex items-center justify-center 
             none: "",
             primary: " bg-kaiserViolet-500 hover:bg-kaiserViolet-500/50 text-gray-100",
             secondary: "bg-gray-100 hover:bg-gray-100/50 text-kaiserViolet-500",
-            ghost: "bg-transparent hover:bg-kaiserViolet-300 text-kaiserViolet-500 hover:text-gray-100"
+            ghost: "bg-transparent hover:bg-kaiserViolet-300 text-gray-400 hover:text-gray-100"
         },
         size: {
             sm: "w-8 h-8 p-1.5 rounded"

@@ -13,7 +13,7 @@ export const inputCheckboxVariants = cva(`
             variant: {
                 none: "",
                 default: `
-                 border-2 border-solid border-kaiserViolet-500 hover:border-kaiserViolet-700
+                 border-2 border-solid border-gray-400 hover:border-kaiserViolet-500
                 hover:bg-kaiserViolet-700/20 checked:border-kaiserViolet-500 checked:bg-kaiserViolet-500
                 group-hover:checked:border-kaiserViolet-700 group-hover:checked:bg-kaiserViolet-700
                 `

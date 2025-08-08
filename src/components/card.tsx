@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-export const cardVariants = cva(" rounded-lg border border-solid border-gray-600 bg-gray-700 text-gray-100 shadow-lg shadow-gray-950/50", {
+export const cardVariants = cva(" rounded-lg border border-solid border-gray-600 bg-gray-700 text-gray-100 shadow-lg shadow-gray-950/50 h-20", {
     variants: {
         size: {
             none: "",
