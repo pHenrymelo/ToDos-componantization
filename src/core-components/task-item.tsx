@@ -7,45 +7,88 @@ import { useState } from "react";
 import { InputText } from "../components/input-text";
 import { TaskState, type Task } from "../models/task";
 import { cx } from "class-variance-authority";
+import { useTask } from "../hooks/use-task";
 
 interface TaskItemProps {
-    task: Task
+  task: Task;
 }
 
-export function TaskItem({task}:TaskItemProps){
+export function TaskItem({ task }: TaskItemProps) {
+  const { updateTask } = useTask();
 
-    const [isEditing, setIsEditing] = useState(task?.state === TaskState.Creating)
+  const [isEditing, setIsEditing] = useState(
+    task?.state === TaskState.Creating,
+  );
 
-    function handleEditTask() {
-        setIsEditing(true)
-    }
+  const [taskTitle, setTaskTitle] = useState(task.title || "");
 
-    function handleCancelEditTask() {
-        setIsEditing(false)
-    }
+  function handleEditTask() {
+    setIsEditing(true);
+  }
 
-    return(
-        <Card size="md" className="flex items-center gap-4">
-            {!isEditing ? <>
-            
-            <InputCheckbox value={task?.isComplete?.toString()} checked={task?.isComplete} />
-            <Text className={cx("flex-1", {"line-through opacity-85": task?.isComplete})}>{task?.title}</Text>
+  function handleCancelEditTask() {
+    setIsEditing(false);
+  }
+
+  function handleChangeTaskTitle(event: React.ChangeEvent<HTMLInputElement>) {
+    setTaskTitle(event.target.value || "");
+  }
+
+  function handleSaveTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    console.log(taskTitle);
+    updateTask(task.id, { title: taskTitle });
+    setIsEditing(false);
+  }
+
+  return (
+    <Card size="md">
+      {!isEditing ? (
+        <div className="flex items-center gap-4">
+          <InputCheckbox
+            value={task?.isComplete?.toString()}
+            checked={task?.isComplete}
+          />
+          <Text
+            className={cx("flex-1", {
+              "line-through opacity-85": task?.isComplete,
+            })}
+          >
+            {task?.title}
+          </Text>
+          <div className="flex items-center justify-center gap-1">
+            <IconButton variant="ghost" icon={<Trash size={16} />} />
+            <IconButton
+              variant="ghost"
+              icon={<Pencil size={16} onClick={handleEditTask} />}
+            />
+          </div>
+        </div>
+      ) : (
+        <>
+          <form onSubmit={handleSaveTask} className="flex items-center gap-4">
+            <InputText
+              className="flex-1"
+              value={taskTitle}
+              onChange={handleChangeTaskTitle}
+              required
+              autoFocus
+            />
             <div className="flex items-center justify-center gap-1">
-                <IconButton variant="ghost" icon={<Trash size={16} />}/>
-                <IconButton variant="ghost" icon={<Pencil size={16} onClick={handleEditTask} />}/>
+              <IconButton
+                variant="secondary"
+                type="button"
+                icon={<X size={16} onClick={handleCancelEditTask} />}
+              />
+              <IconButton
+                variant="primary"
+                type="submit"
+                icon={<Check size={16} />}
+              />
             </div>
-            </> 
-            :
-            <>
-                <InputText className="flex-1" />
-                <div className="flex items-center justify-center gap-1">
-                <IconButton variant="secondary" icon={<X size={16} onClick={handleCancelEditTask} />}/>
-                <IconButton variant="primary" icon={<Check size={16} />}/>
-            </div>
-            </>
-            
-            }
-
-        </Card>
-    )
+          </form>
+        </>
+      )}
+    </Card>
+  );
 }
