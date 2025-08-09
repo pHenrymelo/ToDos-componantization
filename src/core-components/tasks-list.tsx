@@ -1,12 +1,12 @@
 import { Plus } from "lucide-react";
-import { Button } from "../components/button";
+import { TaskState } from "../models/task";
 import { TaskItem } from "./task-item";
+import { Button } from "../components/button";
 import { useTasks } from "../hooks/use-tasks";
 import { useTask } from "../hooks/use-task";
-import { TaskState } from "../models/task";
 
 export function TasksList() {
-  const { tasks } = useTasks();
+  const { tasks, isLoadingTasks } = useTasks();
   const { prepareTask } = useTask();
 
   function handlePrepareTask() {
@@ -21,7 +21,10 @@ export function TasksList() {
         <Button
           variant="secondary"
           onClick={handlePrepareTask}
-          disabled={tasks.some((task) => task.state === TaskState.Creating)}
+          disabled={
+            tasks.some((task) => task.state === TaskState.Creating) ||
+            isLoadingTasks
+          }
           className="flex justify-center items-center w-full text-md font-bold h-20"
         >
           <Plus />
@@ -29,9 +32,16 @@ export function TasksList() {
         </Button>
       </section>
       <section className=" flex flex-col space-y-4">
-        {tasks.map((task) => (
-          <TaskItem key={task.id} task={task} />
-        ))}
+        {!isLoadingTasks &&
+          tasks.map((task) => <TaskItem key={task.id} task={task} />)}
+        {isLoadingTasks && (
+          <>
+            {" "}
+            <TaskItem task={{} as Task} loading />{" "}
+            <TaskItem task={{} as Task} loading />{" "}
+            <TaskItem task={{} as Task} loading />{" "}
+          </>
+        )}
       </section>
     </>
   );

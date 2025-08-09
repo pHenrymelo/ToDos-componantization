@@ -1,50 +1,85 @@
 import { cva, type VariantProps } from "class-variance-authority";
+import { Loader } from "lucide-react";
 import type React from "react";
 import { twMerge } from "tailwind-merge";
 
-export const buttonVariants = cva("flex items-center justify-center cursor-pointer transition rounded-lg group gap-2 duration-300 border-2", {
+export const buttonVariants = cva(
+  "flex items-center justify-center cursor-pointer transition rounded-lg group gap-2 duration-300 border-2",
+  {
     variants: {
-        variant: {
-            primary: "bg-kaiserViolet-500 text-gray-100 hover:bg-kaiserViolet-700 hover:border-kaiserViolet-700 border-kaiserViolet-500 ",
-            secondary: "bg-gray-100 hover:bg-gray-300 hover:border-gray-300 text-kaiserViolet-500 border-gray-100",
-            ghost: "bg-transparent text-kaiserViolet-300 hover:bg-kaiserViolet-300 hover:text-gray-100 border-kaiserViolet-300",
-        },
-        size: {
-            md: "h-14 py-4 px-5"
-        },
-        disabled: {
-            true: "opacity-50 pointer-events-none"
-        },
+      variant: {
+        primary:
+          "bg-kaiserViolet-500 text-gray-100 hover:bg-kaiserViolet-700 hover:border-kaiserViolet-700 border-kaiserViolet-500 ",
+        secondary:
+          "bg-gray-100 hover:bg-gray-300 hover:border-gray-300 text-kaiserViolet-500 border-gray-100",
+        ghost:
+          "bg-transparent text-kaiserViolet-300 hover:bg-kaiserViolet-300 hover:text-gray-100 border-kaiserViolet-300",
+      },
+      size: {
+        md: "h-14 py-4 px-5",
+      },
+      disabled: {
+        true: "opacity-50 pointer-events-none",
+      },
+      handling: {
+        true: "pointer-events-none",
+      },
     },
     defaultVariants: {
-        variant: "primary",
-        size: "md",
-        disabled: false
-    }
-})
+      variant: "primary",
+      size: "md",
+      disabled: false,
+      handling: false,
+    },
+  },
+);
 
 export const buttonIconVariants = cva("transition", {
-    variants: {
-        variant: {
-            primary: "fill-gray-200"
-        },
-        size: {
-            md: "w-5 h-5"
-        }
+  variants: {
+    variant: {
+      primary: "fill-gray-200",
     },
-    defaultVariants: {
-        variant: "primary",
-        size: "md"
-    }
+    size: {
+      md: "w-5 h-5",
+    },
+  },
+  defaultVariants: {
+    variant: "primary",
+    size: "md",
+  },
+});
 
-})
+interface ButtonProps
+  extends Omit<React.ComponentProps<"button">, "size" | "disabled">,
+    VariantProps<typeof buttonVariants> {
+  handling?: boolean;
+}
 
-interface ButtonProps extends Omit<React.ComponentProps<"button">, "size" | "disabled">, VariantProps<typeof buttonVariants> {}
-
-export function Button({variant, size, disabled, className, children, ...props}:ButtonProps){
-    return (
-        <button className={twMerge(buttonVariants({variant, size, disabled}), className)} {...props}>
-            {children}
-        </button>
-    )
+export function Button({
+  variant,
+  size,
+  disabled,
+  className,
+  children,
+  handling,
+  ...props
+}: ButtonProps) {
+  return (
+    <button
+      className={twMerge(
+        buttonVariants({ variant, size, disabled, handling }),
+        className,
+      )}
+      {...props}
+    >
+      {handling ? (
+        <>
+          {" "}
+          <Loader size={18} className="animate-spin" /> Carregando...
+        </>
+      ) : (
+        children
+      )}
+    </button>
+  );
 }
