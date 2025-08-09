@@ -82,29 +82,27 @@ export function TaskItem({ task }: TaskItemProps) {
           </div>
         </div>
       ) : (
-        <>
-          <form onSubmit={handleSaveTask} className="flex items-center gap-4">
-            <InputText
-              className="flex-1"
-              value={taskTitle}
-              onChange={handleChangeTaskTitle}
-              required
-              autoFocus
+        <form onSubmit={handleSaveTask} className="flex items-center gap-4">
+          <InputText
+            className="flex-1"
+            value={taskTitle}
+            onChange={handleChangeTaskTitle}
+            required
+            autoFocus
+          />
+          <div className="flex items-center justify-center gap-1">
+            <IconButton
+              variant="secondary"
+              type="button"
+              icon={<X size={16} onClick={handleCancelEditTask} />}
             />
-            <div className="flex items-center justify-center gap-1">
-              <IconButton
-                variant="secondary"
-                type="button"
-                icon={<X size={16} onClick={handleCancelEditTask} />}
-              />
-              <IconButton
-                variant="primary"
-                type="submit"
-                icon={<Check size={16} />}
-              />
-            </div>
-          </form>
-        </>
+            <IconButton
+              variant="primary"
+              type="submit"
+              icon={<Check size={16} />}
+            />
+          </div>
+        </form>
       )}
     </Card>
   );
