@@ -14,7 +14,7 @@ interface TaskItemProps {
 }
 
 export function TaskItem({ task }: TaskItemProps) {
-  const { updateTask, updateTaskStatus } = useTask();
+  const { updateTask, updateTaskStatus, deleteTask } = useTask();
 
   const [isEditing, setIsEditing] = useState(
     task?.state === TaskState.Creating,
@@ -27,6 +27,10 @@ export function TaskItem({ task }: TaskItemProps) {
   }
 
   function handleCancelEditTask() {
+    if (task.state === TaskState.Creating) {
+      deleteTask(task.id);
+    }
+
     setIsEditing(false);
   }
 
@@ -41,9 +45,13 @@ export function TaskItem({ task }: TaskItemProps) {
     setIsEditing(false);
   }
 
-  function handleChangetaskStatus(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChangeTaskStatus(event: React.ChangeEvent<HTMLInputElement>) {
     const checked = event.target.checked;
     updateTaskStatus(task.id, checked);
+  }
+
+  function handleDeleteTask() {
+    deleteTask(task.id);
   }
 
   return (
@@ -52,7 +60,7 @@ export function TaskItem({ task }: TaskItemProps) {
         <div className="flex items-center gap-4">
           <InputCheckbox
             checked={task?.isComplete}
-            onChange={handleChangetaskStatus}
+            onChange={handleChangeTaskStatus}
           />
           <Text
             className={cx("flex-1", {
@@ -63,7 +71,10 @@ export function TaskItem({ task }: TaskItemProps) {
             {task?.title}
           </Text>
           <div className="flex items-center justify-center gap-1">
-            <IconButton variant="ghost" icon={<Trash size={16} />} />
+            <IconButton
+              variant="ghost"
+              icon={<Trash size={16} onClick={handleDeleteTask} />}
+            />
             <IconButton
               variant="ghost"
               icon={<Pencil size={16} onClick={handleEditTask} />}
