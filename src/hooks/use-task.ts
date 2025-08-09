@@ -25,8 +25,15 @@ export function useTask() {
     );
   }
 
+  function updateTaskStatus(id: string, isComplete: boolean) {
+    setTasks(
+      tasks.map((task) => (task.id === id ? { ...task, isComplete } : task)),
+    );
+  }
+
   return {
     prepareTask,
     updateTask,
+    updateTaskStatus,
   };
 }
